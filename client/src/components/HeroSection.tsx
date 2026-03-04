@@ -50,7 +50,7 @@ export default function HeroSection() {
 
           {/* Subtitle with Gradient */}
           <p className="text-lg md:text-2xl font-semibold mb-6 bg-gradient-to-r from-cyan-400 to-pink-500 bg-clip-text text-transparent">
-            Senior Fullstack Developer
+            Pleno Fullstack Developer
           </p>
 
           {/* Description */}
