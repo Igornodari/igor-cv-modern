@@ -1,12 +1,3 @@
-/**
- * ContactSection Component
- * 
- * Design Philosophy: Tech-Forward Glassmorphism
- * - Contact form with glassmorphic design
- * - Social links with hover animations
- * - Responsive layout
- */
-
 import { useState } from 'react';
 
 interface ContactInfo {
@@ -21,55 +12,42 @@ const contactInfo: ContactInfo[] = [
     label: 'Email',
     value: 'igor.nods@gmail.com',
     href: 'mailto:igor.nods@gmail.com',
-    icon: '✉️'
+    icon: '✉️',
   },
   {
     label: 'Telefone',
     value: '(11) 94264-7380',
     href: 'tel:+5511942647380',
-    icon: '📱'
+    icon: '📱',
   },
   {
     label: 'LinkedIn',
     value: 'Igor Leal Nodari',
     href: 'https://www.linkedin.com/in/igor-leal-nodari-512b7914a/',
-    icon: '💼'
+    icon: '💼',
   },
   {
     label: 'GitHub',
     value: 'igornodari',
     href: 'https://github.com/igornodari',
-    icon: '💻'
-  }
+    icon: '💻',
+  },
 ];
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    // Simulate form submission
     console.log('Form submitted:', formData);
-    
-    // Show success message
+
     setSubmitted(true);
-    
-    // Reset form after 3 seconds
     setTimeout(() => {
       setFormData({ name: '', email: '', message: '' });
       setSubmitted(false);
@@ -79,40 +57,47 @@ export default function ContactSection() {
   return (
     <section id="contact" className="py-20 bg-gradient-to-b from-[#1a1a3e] to-[#0a0e27]">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-16">
+        {/* Header */}
+        <header className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-mono">
             Entre em Contato
           </h2>
-          <div className="h-1 w-24 bg-gradient-to-r from-cyan-400 to-pink-500 mx-auto rounded-full" />
-        </div>
+          <span className="block h-1 w-24 bg-gradient-to-r from-cyan-400 to-pink-500 mx-auto rounded-full" />
+        </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
-          <div className="space-y-6">
+        {/* Layout principal (Flex responsivo) */}
+        <div className="flex flex-col lg:flex-row gap-12">
+          {/* Coluna esquerda */}
+          <div className="flex-1 min-w-0">
             <p className="text-gray-300 text-lg leading-relaxed mb-8">
-              Estou sempre aberto a novas oportunidades e desafios. Sinta-se livre para entrar em contato comigo através de qualquer um dos canais abaixo.
+              Estou sempre aberto a novas oportunidades e desafios. Sinta-se livre para entrar em contato comigo através
+              de qualquer um dos canais abaixo.
             </p>
 
-            {/* Contact Items */}
-            <div className="space-y-4">
+            <div className="flex flex-col gap-4">
               {contactInfo.map((info) => (
                 <a
                   key={info.label}
                   href={info.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glass p-6 rounded-lg border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 transform hover:translate-x-2 group"
+                  className="glass block w-full p-6 rounded-lg border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 hover:translate-x-2 group"
                 >
                   <div className="flex items-center gap-4">
-                    <span className="text-3xl">{info.icon}</span>
-                    <div>
-                      <p className="text-cyan-400 text-sm font-semibold uppercase tracking-wider">
+                    {/* Ícone com largura fixa */}
+                    <span className="w-10 h-10 shrink-0 flex items-center justify-center text-2xl">
+                      {info.icon}
+                    </span>
+
+                    {/* Texto ocupa o resto */}
+                    <div className="flex flex-col flex-1 min-w-0">
+                      <span className="text-cyan-400 text-xs font-semibold uppercase tracking-wider">
                         {info.label}
-                      </p>
-                      <p className="text-white font-semibold group-hover:text-cyan-400 transition-colors">
+                      </span>
+
+                      <span className="text-white font-medium group-hover:text-cyan-400 transition-colors break-words">
                         {info.value}
-                      </p>
+                      </span>
                     </div>
                   </div>
                 </a>
@@ -120,25 +105,21 @@ export default function ContactSection() {
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="glass p-8 rounded-xl border border-cyan-500/20">
+          {/* Coluna direita (Form) */}
+          <div className="flex-1 min-w-0 glass p-8 rounded-xl border border-cyan-500/20">
             {submitted ? (
-              <div className="flex items-center justify-center h-full">
-                <div className="text-center">
-                  <div className="text-5xl mb-4">✓</div>
-                  <h3 className="text-2xl font-bold text-cyan-400 mb-2">
-                    Mensagem Enviada!
-                  </h3>
-                  <p className="text-gray-300">
-                    Obrigado por entrar em contato. Responderei em breve.
-                  </p>
-                </div>
+              <div className="min-h-[320px] flex flex-col items-center justify-center text-center">
+                <div className="text-5xl mb-4">✓</div>
+                <h3 className="text-2xl font-bold text-cyan-400 mb-2">Mensagem Enviada!</h3>
+                <p className="text-gray-300">Obrigado por entrar em contato. Responderei em breve.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Name Input */}
-                <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-cyan-400 mb-2 uppercase tracking-wider">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                <div className="flex flex-col gap-2">
+                  <label
+                    htmlFor="name"
+                    className="text-sm font-semibold text-cyan-400 uppercase tracking-wider"
+                  >
                     Nome
                   </label>
                   <input
@@ -153,9 +134,11 @@ export default function ContactSection() {
                   />
                 </div>
 
-                {/* Email Input */}
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-cyan-400 mb-2 uppercase tracking-wider">
+                <div className="flex flex-col gap-2">
+                  <label
+                    htmlFor="email"
+                    className="text-sm font-semibold text-cyan-400 uppercase tracking-wider"
+                  >
                     Email
                   </label>
                   <input
@@ -170,9 +153,11 @@ export default function ContactSection() {
                   />
                 </div>
 
-                {/* Message Textarea */}
-                <div>
-                  <label htmlFor="message" className="block text-sm font-semibold text-cyan-400 mb-2 uppercase tracking-wider">
+                <div className="flex flex-col gap-2">
+                  <label
+                    htmlFor="message"
+                    className="text-sm font-semibold text-cyan-400 uppercase tracking-wider"
+                  >
                     Mensagem
                   </label>
                   <textarea
@@ -187,10 +172,9 @@ export default function ContactSection() {
                   />
                 </div>
 
-                {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-pink-500 text-gray-900 font-bold rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg shadow-cyan-500/50 hover:shadow-pink-500/50"
+                  className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-pink-500 text-gray-900 font-bold rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.99] shadow-lg shadow-cyan-500/40 hover:shadow-pink-500/40"
                 >
                   Enviar Mensagem
                 </button>

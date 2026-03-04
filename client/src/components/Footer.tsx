@@ -1,10 +1,3 @@
-/**
- * Footer Component
- * 
- * Design Philosophy: Tech-Forward Glassmorphism
- * - Minimal footer with contact links
- * - Glassmorphic design
- */
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
