@@ -19,6 +19,7 @@ import EducationSection from "./components/EducationSection";
 import LanguagesSection from "./components/LanguagesSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             </main>
             <Footer />
           </div>
+          <SpeedInsights />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
