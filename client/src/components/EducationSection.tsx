@@ -1,11 +1,4 @@
-/**
- * EducationSection Component
- * 
- * Design Philosophy: Tech-Forward Glassmorphism
- * - Timeline layout with glassmorphic cards
- * - Smooth entrance animations
- * - Responsive design for mobile and desktop
- */
+
 
 import { useEffect, useRef, useState } from 'react';
 
